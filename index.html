@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ms" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eddy Al Haq | Portfolio Rangkaian Komputer & Web</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#0a0e17',
+                            card: '#111827',
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            emerald: '#10b981',
+                            accent: '#6366f1'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS for Cyber Effects -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .cyber-glow {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+
+        .cyber-text-glow {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #06b6d4;
+            border-radius: 9999px;
+        }
+
+        /* Page transition effect */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white custom-scrollbar">
+
+    <!-- NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800 dark:border-slate-800 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="javascript:void(0)" onclick="switchTab('home')" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                    E
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">EDDY AL HAQ</span>
+                    <span class="block text-[10px] text-cyan-400 font-mono tracking-widest uppercase -mt-1">Rangkaian & IT</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu (8 Pages) -->
+            <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-sm font-medium">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Laman Utama</button>
+                <button onclick="switchTab('profil')" id="nav-profil" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Profil</button>
+                <button onclick="switchTab('kemahiran')" id="nav-kemahiran" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Kemahiran</button>
+                <button onclick="switchTab('pendidikan')" id="nav-pendidikan" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Pendidikan</button>
+                <button onclick="switchTab('projek')" id="nav-projek" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Projek</button>
+                <button onclick="switchTab('pengalaman')" id="nav-pengalaman" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Pengalaman</button>
+                <button onclick="switchTab('kerjaya')" id="nav-kerjaya" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Kerjaya</button>
+                <button onclick="switchTab('hubungi')" id="nav-hubungi" class="nav-btn px-3 py-2 rounded-lg hover:text-cyan-400 hover:bg-slate-800/50 transition">Hubungi</button>
+            </nav>
+
+            <!-- Action Controls & Mobile Toggle -->
+            <div class="flex items-center space-x-3">
+                <!-- Theme Mode Switcher -->
+                <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tukar Tema" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-400 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Buka Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-lg px-4 pt-3 pb-6 space-y-2">
+            <button onclick="switchTab('home')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Laman Utama</button>
+            <button onclick="switchTab('profil')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Profil</button>
+            <button onclick="switchTab('kemahiran')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Kemahiran</button>
+            <button onclick="switchTab('pendidikan')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Pendidikan</button>
+            <button onclick="switchTab('projek')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Projek</button>
+            <button onclick="switchTab('pengalaman')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Pengalaman</button>
+            <button onclick="switchTab('kerjaya')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Kerjaya</button>
+            <button onclick="switchTab('hubungi')" class="mobile-nav-btn block w-full text-left px-4 py-2.5 rounded-lg text-slate-200 hover:bg-slate-800 hover:text-cyan-400">Hubungi</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 1. HOME / LAMAN UTAMA -->
+        <section id="tab-home" class="tab-content active space-y-16 py-6">
+            <!-- Hero Section -->
+            <div class="relative rounded-3xl overflow-hidden glass-panel p-8 sm:p-12 lg:p-16 border border-slate-800 flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="absolute -top-24 -left-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="space-y-6 max-w-2xl text-center lg:text-left z-10">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <span>Sedia Untuk Cabaran Kerjaya IT & Rangkaian</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Hai, Saya <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 bg-clip-text text-transparent">Eddy Al Haq</span>
+                    </h1>
+
+                    <p class="text-lg text-slate-400 font-light leading-relaxed">
+                        Pelajar <strong class="text-slate-200 font-medium">Diploma Teknologi Rangkaian Komputer</strong> dari <span class="text-cyan-400">Kolej Vokasional Kluang</span>. Mempunyai minat mendalam dalam Pengurusan Rangkaian, Web Development, Programming & Multimedia.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="downloadCV()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:scale-[1.02] active:scale-95 transition flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Muat Turun CV</span>
+                        </button>
+                        <button onclick="switchTab('hubungi')" class="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-500/50 font-semibold hover:scale-[1.02] active:scale-95 transition flex items-center space-x-2">
+                            <i class="fa-solid fa-paper-plane text-cyan-400"></i>
+                            <span>Hubungi Saya</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Avatar / Cyber Visual -->
+                <div class="relative z-10">
+                    <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-slate-900 border-2 border-cyan-500/30 p-4 relative flex items-center justify-center shadow-2xl group">
+                        <!-- Decorative Corners -->
+                        <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-cyan-400"></div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-cyan-400"></div>
+                        <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-cyan-400"></div>
+                        <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-cyan-400"></div>
+
+                        <div class="w-full h-full rounded-2xl bg-slate-950 flex flex-col items-center justify-center text-center p-6 space-y-4 overflow-hidden">
+                            <img src="images1.jpeg" alt="Eddy Al Haq" class="w-24 h-24 rounded-full object-cover border-2 border-cyan-400 shadow-lg">
+                            <div>
+                                <h3 class="font-bold text-lg text-white">Eddy Al Haq</h3>
+                                <p class="text-xs text-cyan-400 font-mono mt-1">KV Kluang Alumni / Trainee</p>
+                            </div>
+                            <div class="flex space-x-3 text-slate-400 text-lg">
+                                <span title="Networking"><i class="fa-solid fa-network-wired hover:text-cyan-400 transition"></i></span>
+                                <span title="Web Dev"><i class="fa-solid fa-code hover:text-cyan-400 transition"></i></span>
+                                <span title="Multimedia"><i class="fa-solid fa-photo-film hover:text-cyan-400 transition"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fast Highlight Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Rangkaian Komputer</h3>
+                    <p class="text-slate-400 text-sm">Kemahiran Cisco Packet Tracer, Subnetting IPv4, Routing & Switching.</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Web & Programming</h3>
+                    <p class="text-slate-400 text-sm">Membina laman web responsif menggunakan HTML, CSS, JavaScript & Tailwind.</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Information Tech</h3>
+                    <p class="text-slate-400 text-sm">Penyelenggaraan sistem, Server Windows/Linux, dan Troubleshooting IT.</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-photo-film"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Multimedia</h3>
+                    <p class="text-slate-400 text-sm">Reka bentuk grafik digital & penyuntingan media untuk pelbagai platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PROFIL / BIODATA -->
+        <section id="tab-profil" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-address-card text-cyan-400"></i> Profil & Mengenai Saya
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Biodata peribadi, latar belakang, dan falsafah kerja.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Personal Info Card -->
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white border-b border-slate-800 pb-3 flex items-center justify-between">
+                        <span>Maklumat Peribadi</span>
+                        <i class="fa-solid fa-user text-cyan-400 text-sm"></i>
+                    </h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex justify-between border-b border-slate-800/60 pb-2">
+                            <span class="text-slate-400">Nama Penuh</span>
+                            <span class="text-slate-200 font-semibold text-right">Eddy Al Haq Bin Eddy Nor</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-800/60 pb-2">
+                            <span class="text-slate-400">Bidang Pengajian</span>
+                            <span class="text-cyan-400 font-semibold text-right">Teknologi Rangkaian</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-800/60 pb-2">
+                            <span class="text-slate-400">Institusi</span>
+                            <span class="text-slate-200 font-semibold text-right">KV Kluang, Johor</span>
+                        </li>
+                        <li class="flex justify-between border-b border-slate-800/60 pb-2">
+                            <span class="text-slate-400">Warganegara</span>
+                            <span class="text-slate-200 font-semibold">Malaysia</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-slate-400">Bahasa</span>
+                            <span class="text-slate-200 font-semibold">Bahasa Melayu, English</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Detailed Bio & Philosophy -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-bullseye text-cyan-400"></i> Biografi Ringkas
+                        </h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Saya <strong>Eddy Al Haq Bin Eddy Nor</strong>, seorang pelajar yang amat berminat dan berdedikasi dalam bidang <span class="text-cyan-400">Teknologi Rangkaian Komputer</span> dan pembangunan perisian digital di Kolej Vokasional Kluang. Berteraskan pendidikan teknikal dan vokasional (TVET), saya terlatih secara amali untuk memahami ekosistem infrastruktur IT dari skema penghubung rangkaian sehingga kepada pembangunan sistem web.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            Bagi saya, gabungan kebolehan menyelenggara rangkaian fizikal/logikal dan membina perisian interaktif adalah kekuatan utama untuk menyelesaikan pelbagai cabaran teknologi moden.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-cyan-400"></i> Falsafah Kerja & Nilai Peribadi
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-arrows-split-up-and-left mr-2"></i>Adaptabiliti High-Tech</h4>
+                                <p class="text-xs text-slate-400">Sentiasa bersedia mempelajari alatan & protokol baharu dalam arus pesat IT.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                                <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-shield-halved mr-2"></i>Integriti & Keselamatan</h4>
+                                <p class="text-xs text-slate-400">Mengutamakan aspek keselamatan data dan konfigurasi rangkaian yang stabil.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. KEMAHIRAN / SKILLS -->
+        <section id="tab-kemahiran" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-sliders text-cyan-400"></i> Kemahiran & Kepakaran
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Tahap penguasaan teknikal dalam pelbagai domain IT & Rangkaian.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Networking Skills -->
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired text-cyan-400"></i> Rangkaian Komputer
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">Cisco Packet Tracer & Router/Switch Config</span>
+                                <span class="text-cyan-400">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">IPv4/IPv6 Subnetting & VLSM</span>
+                                <span class="text-cyan-400">90%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">Routing Protocols (OSPF, RIP, Static)</span>
+                                <span class="text-cyan-400">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">LAN Cabling (UTP Cat5e/Cat6) & Testing</span>
+                                <span class="text-cyan-400">95%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web & Programming Skills -->
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code text-blue-400"></i> Pembangunan Web & Pengaturcaraan
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">HTML5 & CSS3 Responsive Layouts</span>
+                                <span class="text-blue-400">90%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">JavaScript Interaktif</span>
+                                <span class="text-blue-400">75%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">Tailwind CSS Framework</span>
+                                <span class="text-blue-400">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm font-medium mb-1">
+                                <span class="text-slate-300">Asas Pengaturcaraan (C++ / Python)</span>
+                                <span class="text-blue-400">70%</span>
+                            </div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5 border border-slate-800">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2.5 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IT & Multimedia Badges Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-server text-indigo-400"></i> Sokongan Teknologi Maklumat (IT)
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-brands fa-windows text-blue-400 mr-1.5"></i>Windows Server</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-brands fa-ubuntu text-orange-400 mr-1.5"></i>Linux OS</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-screwdriver-wrench text-yellow-400 mr-1.5"></i>Hardware Troubleshooting</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-database text-cyan-400 mr-1.5"></i>Database Basic</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i> Multimedia & Rekabentuk
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-image text-emerald-400 mr-1.5"></i>Photoshop Design</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-video text-emerald-400 mr-1.5"></i>Video Editing</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-pen-nib text-emerald-400 mr-1.5"></i>UI/UX Wireframing</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300"><i class="fa-solid fa-display text-emerald-400 mr-1.5"></i>Presentation Design</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PENDIDIKAN / EDUCATION -->
+        <section id="tab-pendidikan" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Latar Belakang Pendidikan
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Institusi pengajian dan pencapaian akademik.</p>
+            </div>
+
+            <!-- Education Timeline -->
+            <div class="relative border-l-2 border-slate-800 ml-4 space-y-8">
+                <!-- KV Kluang Diploma -->
+                <div class="relative pl-8 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-950 group-hover:scale-125 transition-transform"></div>
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-500/30">Pengajian Semasa</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar mr-1"></i>Kolej Vokasional Kluang</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Diploma Teknologi Rangkaian Komputer</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Fokus pengajian kepada infrastruktur rangkaian enterprise, keselamatan siber asas, pentadbiran pelayan (Server Administration), serta pembangunan perisian web sokongan.
+                        </p>
+                        <div class="pt-2">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Mata Pelajaran Utama:</h4>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-2.5 py-1 rounded-md bg-slate-900 text-slate-300">Computer Network Architecture</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-900 text-slate-300">Routing & Switching Essentials</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-900 text-slate-300">Server Operating System</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-900 text-slate-300">Web Application Development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SVM Stage -->
+                <div class="relative pl-8 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-slate-950 group-hover:bg-cyan-400 transition-colors"></div>
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-slate-900 text-slate-400 border border-slate-800">Sijil Vokasional Malaysia</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar mr-1"></i>Kolej Vokasional Kluang</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Sijil Vokasional Malaysia (SVM) Rangkaian Komputer</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Pendedahan asas menyeluruh mengenai pemasangan perkakasan PC, pengabelan struktur UTP, konfigurasi penghala (router) serta pembaikan gangguan sistem komputer.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications / Academic Highlights -->
+            <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-award text-yellow-400"></i> Pencapaian & Sijil Kemahiran
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start space-x-3">
+                        <i class="fa-solid fa-certificate text-cyan-400 text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-200 text-sm">Sijil Amali Rangkaian</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">Penilaian Amali KV Kluang</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start space-x-3">
+                        <i class="fa-solid fa-award text-yellow-400 text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-200 text-sm">Projek Akhir Rangkaian</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">Reka Bentuk Topologi Kampus</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 flex items-start space-x-3">
+                        <i class="fa-solid fa-laptop-code text-indigo-400 text-2xl mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-200 text-sm">Bengkel Web & IT</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">Penyertaan Aktiviti Teknikal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PROJEK / PROJECTS -->
+        <section id="tab-projek" class="tab-content space-y-10 py-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-800 pb-6 gap-4">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-folder-open text-cyan-400"></i> Galeri Projek
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Hasil kerja amali rangkaian, perisian web dan media.</p>
+                </div>
+
+                <a href="https://vt.tiktok.com/ZSqqFgu2b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-xs shadow-lg shadow-cyan-500/20 hover:scale-[1.01] transition">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>Tonton Video</span>
+                </a>
+
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <button onclick="filterProjects('all')" class="proj-filter-btn active px-3 py-1.5 rounded-lg bg-cyan-500 text-white font-medium transition">Semua</button>
+                    <button onclick="filterProjects('network')" class="proj-filter-btn px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 transition">Rangkaian</button>
+                    <button onclick="filterProjects('web')" class="proj-filter-btn px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 transition">Web Dev</button>
+                    <button onclick="filterProjects('multimedia')" class="proj-filter-btn px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 transition">Multimedia</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project Card 1 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition" data-category="network">
+                    <div class="h-44 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-diagram-project text-6xl text-cyan-500/30 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-cyan-950/80 text-cyan-400 text-[10px] font-mono border border-cyan-500/30">Rangkaian</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">Topologi Kampus KV Kluang</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Konfigurasi Cisco Packet Tracer menggabungkan VLAN, OSPF Routing, & Server Inter-VLAN.</p>
+                        <div class="space-y-2">
+                            <button onclick="openModal('Topologi Kampus KV Kluang', 'Konfigurasi lengkap persekitaran simulasi rangkaian kampus menggunakan Cisco Packet Tracer. Melibatkan pembahagian VLAN mengikut jabatan, laluan dinamik OSPF, dan kawalan akses keselamatan (ACL).', ['Cisco Packet Tracer', 'VLAN', 'OSPF Routing', 'Subnetting'])" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-white border border-slate-800 text-xs text-cyan-400 font-semibold transition">Lihat Butiran</button>
+                            <a href="https://vt.tiktok.com/ZSqqFgu2b/" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500 hover:text-white border border-cyan-500/30 text-xs text-cyan-300 font-semibold transition text-center">
+                                Lihat Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition" data-category="web">
+                    <div class="h-44 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-globe text-6xl text-blue-500/30 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-blue-950/80 text-blue-400 text-[10px] font-mono border border-blue-500/30">Web Dev</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">Portal Maklumat Pelajar</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Laman web pengurusan maklumat pelajar mudah alih berpandukan reka bentuk antaramuka moden.</p>
+                        <button onclick="openModal('Portal Maklumat Pelajar', 'Aplikasi web interaktif untuk menyusun jadual amali dan biodata pelajar. Mempunyai fungsi carian serta paparan yang mesra pengguna mobile.', ['HTML5', 'Tailwind CSS', 'JavaScript', 'Responsive'])" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-white border border-slate-800 text-xs text-cyan-400 font-semibold transition">Lihat Butiran</button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition" data-category="network">
+                    <div class="h-44 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-server text-6xl text-indigo-500/30 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-indigo-950/80 text-indigo-400 text-[10px] font-mono border border-indigo-500/30">Rangkaian / IT</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">Linux Ubuntu Web Server Setup</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Pemasangan dan konfigurasi Apache Web Server & SSH Remote Management pada Linux.</p>
+                        <button onclick="openModal('Linux Ubuntu Web Server Setup', 'Penyediaan persekitaran pelayan (Server Environment) tempatan pada Ubuntu OS, pengurusan kebenaran fail (file permissions), dan perkhidmatan SSH untuk pengurusan jarak jauh.', ['Ubuntu Linux', 'Apache2', 'SSH', 'Terminal Scripting'])" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-white border border-slate-800 text-xs text-cyan-400 font-semibold transition">Lihat Butiran</button>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition" data-category="multimedia">
+                    <div class="h-44 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-photo-film text-6xl text-emerald-500/30 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-950/80 text-emerald-400 text-[10px] font-mono border border-emerald-500/30">Multimedia</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">Video Montage Vokasional</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Penyuntingan video montaj aktiviti makmal teknologi rangkaian menggunakan Adobe Premiere.</p>
+                        <button onclick="openModal('Video Montage Vokasional', 'Projek penghasilan media kreatif bagi mempromosikan kursus Teknologi Rangkaian Komputer menerusi gabungan kesan khas, transisi audio, dan penyuntingan visual bertema cyber.', ['Adobe Premiere', 'Photoshop', 'Audio Editing', 'Video Production'])" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-white border border-slate-800 text-xs text-cyan-400 font-semibold transition">Lihat Butiran</button>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card glass-panel rounded-2xl overflow-hidden border border-slate-800 group hover:border-cyan-500/50 transition" data-category="web">
+                    <div class="h-44 bg-slate-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-calculator text-6xl text-cyan-500/30 group-hover:scale-110 transition-transform duration-300"></i>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-cyan-950/80 text-cyan-400 text-[10px] font-mono border border-cyan-500/30">Web Dev</span>
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">IP Subnetting Calculator</h3>
+                        <p class="text-slate-400 text-xs line-clamp-2">Alat web mudah untuk mengira Subnet Mask, Network ID & Broadcast Address.</p>
+                        <button onclick="openModal('IP Subnetting Calculator', 'Aplikasi web mini berasaskan JavaScript yang membantu pelajar rangkaian mengira alamat IP, subnet mask, bilangan hos, dan lingkungan IP secara automatik.', ['JavaScript Logic', 'HTML5', 'CSS Grid', 'IPv4 Addressing'])" class="w-full py-2 rounded-xl bg-slate-900 hover:bg-cyan-500 hover:text-white border border-slate-800 text-xs text-cyan-400 font-semibold transition">Lihat Butiran</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PENGALAMAN / EXPERIENCE -->
+        <section id="tab-pengalaman" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-briefcase text-cyan-400"></i> Pengalaman Amali & Industri
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Latihan amali, projek teknikal, dan tugasan lapangan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Amali Pemasangan & Maintenance Makmal</h3>
+                            <p class="text-xs text-cyan-400">Kolej Vokasional Kluang</p>
+                        </div>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-slate-900 text-slate-400 border border-slate-800">Tugasan Amali</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                        <li>Melakukan kerja-kerja pengabelan UTP (Crimping Cat5e/Cat6, Patch Panel).</li>
+                        <li>Menguruskan susunan kabel (Cable Management) di dalam Rack Server makmal.</li>
+                        <li>Troubleshooting gangguan sambungan Internet pada PC pelajar & pensyarah.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div>
+                            <h3 class="font-bold text-white text-lg">Konfigurasi Peranti Network Cisco</h3>
+                            <p class="text-xs text-cyan-400">Sesi Latihan Kurikulum</p>
+                        </div>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-slate-900 text-slate-400 border border-slate-800">Latihan Amali</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-300 list-disc list-inside">
+                        <li>Mengisi tetapan asas CLI pada Router dan Switch Cisco (Hostname, Password, SSH).</li>
+                        <li>Membuat pembahagian Virtual LAN (VLAN) untuk mengurangkan lalu lintas broadcast.</li>
+                        <li>Menjalankan pengujian ping, traceroute, dan analisis paket data.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. KERJAYA / CAREER OBJECTIVES -->
+        <section id="tab-kerjaya" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-compass text-cyan-400"></i> Matlamat Kerjaya
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Hala tuju profesional dan sasaran 3-5 tahun akan datang.</p>
+            </div>
+
+            <!-- Targeted Roles -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <a href="https://my.jobstreet.com/career-advice/article/bidang-it" target="_blank" rel="noopener noreferrer" class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 hover:border-cyan-500/50 transition block">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Pentadbir Rangkaian</h3>
+                    <p class="text-xs text-slate-400">Mengurus infrastruktur rangkaian syarikat agar sentiasa selamat dan berprestasi tinggi.</p>
+                </a>
+
+                <a href="https://my.jobstreet.com/career-advice/article/bidang-it" target="_blank" rel="noopener noreferrer" class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 hover:border-cyan-500/50 transition block">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Pembangun Web Junior</h3>
+                    <p class="text-xs text-slate-400">Membina dan mengekalkan sistem web interaktif mesra pengguna.</p>
+                </a>
+
+                <a href="https://my.jobstreet.com/career-advice/article/bidang-it" target="_blank" rel="noopener noreferrer" class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 hover:border-cyan-500/50 transition block">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-base">Eksekutif Sokongan IT</h3>
+                    <p class="text-xs text-slate-400">Memberikan bantuan teknikal perisian, perkakasan, dan isu sistem secara profesional.</p>
+                </a>
+            </div>
+
+            <!-- 3-5 Years Roadmap -->
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-6">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-timeline text-cyan-400"></i> Pelan Pembangunan Kerjaya (Roadmap)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                        <span class="text-xs font-mono font-bold text-cyan-400">Tahun 1 - 2</span>
+                        <h4 class="font-bold text-white">Pengukuhan Asas & Pengalaman</h4>
+                        <p class="text-xs text-slate-400">Menyertai industri sebagai Sokongan Rangkaian/IT Junior. Mengambil persijilan profesional Cisco CCNA.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                        <span class="text-xs font-mono font-bold text-blue-400">Tahun 3 - 4</span>
+                        <h4 class="font-bold text-white">Spesialisasi Sistem & Cyber</h4>
+                        <p class="text-xs text-slate-400">Mendalami aspek keselamatan rangkaian (Keselamatan Rangkaian) & Pentadbiran Pelayan (Linux/Cloud).</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                        <span class="text-xs font-mono font-bold text-indigo-400">Tahun 5+</span>
+                        <h4 class="font-bold text-white">Pakar Rangkaian Kanan</h4>
+                        <p class="text-xs text-slate-400">Memimpin perancangan seni bina rangkaian (Network Architecture) dan pengurusan infrastruktur IT besar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. HUBUNGI / CONTACT -->
+        <section id="tab-hubungi" class="tab-content space-y-10 py-6">
+            <div class="border-b border-slate-800 pb-6">
+                <h2 class="text-3xl font-extrabold text-white flex items-center gap-3">
+                    <i class="fa-solid fa-envelope text-cyan-400"></i> Hubungi Saya
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">Mari berbincang mengenai peluang kerjaya, projek, atau kolaborasi teknikal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Contact Details -->
+                <div class="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white">Maklumat Perhubungan</h3>
+                    
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-medium">Emel</h4>
+                                <a href="mailto:eddyalhaq@gmail.com" class="text-slate-200 font-semibold hover:text-cyan-400 transition">eddyalhaq@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-medium">WhatsApp / Telefon</h4>
+                                <a href="https://wa.me/60123456789" target="_blank" class="text-slate-200 font-semibold hover:text-emerald-400 transition">+60 1x-xxx xxxx</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs text-slate-400 font-medium">Lokasi</h4>
+                                <p class="text-slate-200 font-semibold">Kluang, Johor, Malaysia</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800 space-y-3">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Rangkaian Sosial:</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition">
+                                <i class="fa-brands fa-github text-lg"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500 text-slate-300 hover:text-blue-400 flex items-center justify-center transition">
+                                <i class="fa-brands fa-linkedin-in text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2 glass-panel rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white">Hantar Mesej</h3>
+                    
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Nama Penuh</label>
+                                <input type="text" required placeholder="Nama anda..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Alamat Emel</label>
+                                <input type="email" required placeholder="emel@contoh.com..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Subjek Mesej</label>
+                            <input type="text" required placeholder="Tujuan perhubungan..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Mesej</label>
+                            <textarea rows="4" required placeholder="Tulis mesej anda di sini..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/20 hover:scale-[1.01] active:scale-95 transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Hantar Mesej Sekarang</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-xl rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
+            <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed"></p>
+            <div>
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Teknologi Digunakan:</h4>
+                <div id="modal-tags" class="flex flex-wrap gap-2 text-xs"></div>
+            </div>
+            <button onclick="closeModal()" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 font-semibold text-xs transition">Tutup Modal</button>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="px-5 py-3.5 rounded-2xl bg-cyan-950 border border-cyan-500/40 text-cyan-300 text-sm font-medium shadow-2xl flex items-center space-x-3">
+            <i class="fa-solid fa-circle-check text-cyan-400 text-lg"></i>
+            <span id="toast-message">Mesej berjaya dihantar!</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full glass-panel border-t border-slate-800 mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <p>© 2026 Eddy Al Haq Bin Eddy Nor. Hak Cipta Terelihara.</p>
+            <p class="font-mono">Kolej Vokasional Kluang • Diploma Teknologi Rangkaian Komputer</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Switch between the 8 main tabs
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show target tab
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // Update Desktop Nav Active Styles
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('text-cyan-400', 'bg-slate-800/80', 'font-bold');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-cyan-400', 'bg-slate-800/80', 'font-bold');
+            }
+
+            // Close Mobile Menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+
+            // Scroll top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Theme Toggle (Dark / Light Mode)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.className = 'fa-solid fa-sun text-yellow-500';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-moon text-slate-300';
+            }
+        }
+
+        // Project Filter Buttons
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update filter buttons style
+            const filterBtns = document.querySelectorAll('.proj-filter-btn');
+            filterBtns.forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-white');
+                btn.classList.add('bg-slate-900', 'text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-900', 'text-slate-300');
+            event.target.classList.add('bg-cyan-500', 'text-white');
+        }
+
+        // Modal Controls
+        function openModal(title, desc, tags) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = '';
+            tags.forEach(t => {
+                const tagEl = document.createElement('span');
+                tagEl.className = 'px-3 py-1 rounded-lg bg-cyan-950 text-cyan-400 border border-cyan-500/30';
+                tagEl.innerText = t;
+                tagsContainer.appendChild(tagEl);
+            });
+
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Toast Notification System (replaces alert)
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+            messageEl.innerText = msg;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+
+        // Handle Contact Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('Mesej anda telah berjaya dihantar kepada Eddy Al Haq!');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Download CV Action Trigger
+        function downloadCV() {
+            showToast('CV Eddy Al Haq sedia untuk dimuat turun!');
+        }
+
+        // Initialize active state on load
+        window.onload = function() {
+            switchTab('home');
+        };
+    </script>
+</body>
+</html>
