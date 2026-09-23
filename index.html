@@ -126,6 +126,11 @@
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
 
+                <!-- Background Music Toggle -->
+                <button id="music-toggle" onclick="toggleMusic()" aria-label="Hidupkan muzik" aria-pressed="false" title="Hidupkan muzik" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-400 transition">
+                    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+                </button>
+
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Buka Menu" class="lg:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400">
                     <i class="fa-solid fa-bars text-lg"></i>
@@ -859,6 +864,9 @@
         </div>
     </footer>
 
+    <!-- Background Music -->
+    <audio id="background-music" src="ikson.mp3" loop preload="auto"></audio>
+
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
         // Switch between the 8 main tabs
@@ -911,6 +919,30 @@
                 html.classList.remove('light');
                 html.classList.add('dark');
                 icon.className = 'fa-solid fa-moon text-slate-300';
+            }
+        }
+
+        // Background Music Toggle
+        function toggleMusic() {
+            const music = document.getElementById('background-music');
+            const button = document.getElementById('music-toggle');
+            const icon = document.getElementById('music-icon');
+
+            if (music.paused) {
+                music.play().then(() => {
+                    icon.className = 'fa-solid fa-volume-high text-cyan-400';
+                    button.setAttribute('aria-label', 'Matikan muzik');
+                    button.setAttribute('title', 'Matikan muzik');
+                    button.setAttribute('aria-pressed', 'true');
+                }).catch(() => {
+                    showToast('Muzik tidak dapat dimainkan. Sila semak fail ikson.mp3.');
+                });
+            } else {
+                music.pause();
+                icon.className = 'fa-solid fa-volume-xmark';
+                button.setAttribute('aria-label', 'Hidupkan muzik');
+                button.setAttribute('title', 'Hidupkan muzik');
+                button.setAttribute('aria-pressed', 'false');
             }
         }
 
